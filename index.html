@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body ng-app="app">
+  <div class="container" ng-controller='main'>
+<img src="http://i.imgur.com/n87CmGb.png" alt="">
+  <div class="row">
+    <div class="label label-default">R1</div>
+    <button class="btn btn-default" ng-click="r1 = r1 - 1"><i class="glyphicon glyphicon-minus" ></i></button>
+    <input type="text" ng-model="r1" ng-init="r1=0">
+    <button class="btn btn-default" ng-click="r1 = r1 + 1"><i class="glyphicon glyphicon-plus"></i></button>
+  </div>
+    
+  <div class="row">
+    <div class="label label-default" ng-click="r2 = r2 - 1">R2</div>
+    <button class="btn btn-default"><i class="glyphicon glyphicon-minus" ></i></button>
+    <input type="text" ng-model="r2" ng-init="r2 = 0">
+    <button class="btn btn-default" ng-click="r2=r2+1"><i class="glyphicon glyphicon-plus" ></i></button>
+  </div>
+    
+  <div class="row">
+    <div class="label label-default" ng-click="r3 = r3 - 1">R3</div>
+    <button class="btn btn-default"><i class="glyphicon glyphicon-minus" ></i></button>
+    <input type="text" ng-model="r3" ng-init="r3 = 0">
+    <button class="btn btn-default" ng-click="r3=r3+1"><i class="glyphicon glyphicon-plus" ></i></button>
+  </div>
+    
+  <div class="row">
+    <div class="label label-default">R4</div>
+    <button class="btn btn-default" ng-click="r4 = r4 - 1"><i class="glyphicon glyphicon-minus" ></i></button>
+    <input type="text" ng-model="r4" ng-init="r4 = 0">
+    <button class="btn btn-default" ng-click="r4=r4+1"><i class="glyphicon glyphicon-plus" ></i></button>
+  </div>
+    
+  <div class="row">
+    <div class="label label-default">Vin</div>
+    <button class="btn btn-default"><i class="glyphicon glyphicon-minus" ng-click="vin = vin - 1"></i></button>
+    <input type="text" ng-model="vin" ng-init="vin = 0">
+    <button class="btn btn-default"><i class="glyphicon glyphicon-plus" ng-click="vin = vin + 1"></i></button>
+  </div>
+<table class="table">
+  <tr>
+    <td>#</td>
+    <td>R</td>
+    <td>I</td>
+    <td>V</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>{{r1}}</td>
+    <td>{{I(vin,r1+r2)|number}}</td>
+    <td>{{V(I(vin,r1+r2),r1) | number}}</td>
+  </tr>
+  
+  <tr>
+    <td>2</td>
+    <td>{{r2}}</td>
+    <td>{{I(vin,r1+r2)|number}}</td>
+    <td>{{V(I(vin,r1+r2),r2) | number}}</td>
+  </tr>
+  
+  <tr>
+    <td>3</td>
+    <td>{{r3}}</td>
+    <td>{{I(vin,r3+r4)|number}}</td>
+    <td>{{V(I(vin,r3+r4),r3) | number}}</td>
+  </tr>
+  
+  <tr>
+    <td>4</td>
+    <td>{{r4}}</td>
+    <td>{{I(vin,r3+r4)|number}}</td>
+    <td>{{V(I(vin,r3+r4),r4) | number}}</td>
+  </tr>
+  
+</table>
+    
+      <div class="label label-default">Vout</div>
+      {{V(I(vin,r3+r4),r4)-V(I(vin,r1+r2),r2)|number}}
+    
+  </div>
+  
+  <script>
+    angular.module('app', []).controller('main', ['$scope', function($scope){
+$scope.I = function(v, r) {
+  return v/r;
+};
+$scope.V = function V(i, r) {
+  return i*r;
+};  
+}]);</script>
+</body>
+</html>
